@@ -12,19 +12,24 @@ jobs:
     parallelism: 1
     steps:
       - checkout
+      - run: pwd
+      - run: ls
       - restore_cache:
           keys:
             - v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - v2-deps-{{ .Branch }}-
             - v2-deps-
-      - run:
-          name: Install deps
-          command: npm install
+      - run: npm ci
       - save_cache:
           key: v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .cache
+            - app
       - run:
           name: Running E2E tests with JUnit reporter
           command: npm run test-junit
