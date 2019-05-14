@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # the Docker image with Cypress dependencies
-      - image: cypress/base:8
+      - image: cypress/base
         environment:
           ## this enables colors in the output
           TERM: xterm
@@ -23,6 +23,9 @@ jobs:
 #          paths:
 #            - ~/.npm
 #            - ~/.cache
+      - run:
+          name: Install deps
+          command: npm install
       - run:
           name: Running E2E tests with JUnit reporter
           command: npm run test-junit
