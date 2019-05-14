@@ -1,0 +1,46 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      # the Docker image with Cypress dependencies
+      - image: cypress/base
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    working_directory: ~/app
+    parallelism: 2
+    steps:
+      - checkout
+      - run: pwd
+      - run: ls
+      - restore_cache:
+          keys:
+            - v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v2-deps-{{ .Branch }}-
+            - v2-deps-
+      - run: npm ci
+      - save_cache:
+          key: v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .cache
+            - app
+      - run:
+          name: Running E2E tests with JUnit reporter
+          command: npm run testsuite-1
+      - store_test_results:
+          path: junit-results
+      - run:
+          name: Running E2E tests with multiple reporters
+          command: npm run testsuite-2
+      - store_test_results:
+          path: multiple-results
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
