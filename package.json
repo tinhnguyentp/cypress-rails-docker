@@ -5,8 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "testsuite-1": "cypress run --spec 'cypress/integration/example1/*' --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'",
-    "testsuite-2": "cypress run --spec 'cypress/integration/example2/*' --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'"
+    "testsuite-1": "cypress run --spec 'cypress/integration/example1/*' --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output1.xml'",
+    "testsuite-2": "cypress run --spec 'cypress/integration/example2/*' --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output2.xml'"
   },
   "keywords": [],
   "author": "",

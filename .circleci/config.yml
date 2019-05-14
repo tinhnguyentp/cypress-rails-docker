@@ -45,7 +45,7 @@ jobs:
           name: Running E2E tests A
           command: npm run testsuite-1
       - store_test_results:
-          path: results
+          path: my-test-output1
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
@@ -61,7 +61,7 @@ jobs:
           name: Running E2E tests B
           command: npm run testsuite-2
       - store_test_results:
-          path: results
+          path: my-test-output2
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
