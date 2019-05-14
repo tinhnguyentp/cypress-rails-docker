@@ -5,8 +5,6 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test-junit": "cypress run --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'",
-    "test-multiple": "cypress run --reporter mocha-multi-reporters --reporter-options configFile=config.json",
     "testsuite-1": "cypress run -spec cypress/integration/example1 --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'",
     "testsuite-2": "cypress run -spec cypress/integration/example2 --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'"
 
